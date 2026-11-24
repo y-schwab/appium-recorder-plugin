@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Appium Recorder</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Appium Recorder</h1>
+      <span class="muted" id="server"></span>
+    </header>
+    <main>
+      <div id="error" class="alert" hidden></div>
+      <div id="action-error" class="alert" hidden>
+        <span id="action-error-text"></span>
+        <button type="button" id="dismiss-error" aria-label="Dismiss">×</button>
+      </div>
+      <section>
+        <table id="recordings">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Started</th>
+              <th>App</th>
+              <th>Steps</th>
+              <th>Session</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p id="empty" class="muted" hidden>
+          No recordings yet. Start one from a session with
+          <code>driver.executeScript('recorder: start', [])</code>, or with the Record button of a live session
+          below.
+        </p>
+      </section>
+      <section id="details" hidden>
+        <div class="details-head">
+          <span id="d-status"></span>
+          <code id="d-session"></code>
+          <span class="muted" id="d-meta"></span>
+          <span class="spacer"></span>
+          <span id="d-controls" class="controls"></span>
+        </div>
+        <p id="d-idle" class="muted" hidden>
+          This session is not being recorded. Press Record to record its next commands.
+        </p>
+        <div id="d-tabs">
+          <nav class="tabs">
+            <button type="button" data-tab="code" class="active">Generated code</button>
+            <button type="button" data-tab="steps">Steps</button>
+            <button type="button" data-tab="locators">locators.md</button>
+          </nav>
+          <div data-panel="code">
+            <div class="toolbar">
+              <select id="framework" aria-label="Language"></select>
+              <label><input type="checkbox" id="boilerplate" /> Boilerplate</label>
+              <button type="button" id="copy-code">Copy</button>
+            </div>
+            <pre id="code"></pre>
+          </div>
+          <div data-panel="steps" hidden>
+            <table id="steps">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Action</th>
+                  <th>Target</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div data-panel="locators" hidden>
+            <div class="toolbar">
+              <button type="button" id="download-locators">Download</button>
+            </div>
+            <pre id="locators"></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

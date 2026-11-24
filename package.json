@@ -1,0 +1,102 @@
+{
+  "name": "appium-recorder-plugin",
+  "version": "0.1.0",
+  "description": "Appium plugin that records what any client does in a session and turns it into locators and test code",
+  "keywords": [
+    "appium",
+    "appium-plugin",
+    "locators",
+    "recorder",
+    "test-generation"
+  ],
+  "homepage": "https://github.com/y-schwab/appium-recorder-plugin",
+  "bugs": {
+    "url": "https://github.com/y-schwab/appium-recorder-plugin/issues"
+  },
+  "license": "Apache-2.0",
+  "author": "Yuri Schwab",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/y-schwab/appium-recorder-plugin.git"
+  },
+  "files": [
+    "lib",
+    "ui",
+    "LICENSE",
+    "NOTICE",
+    "README.md"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "lint": "oxlint -c oxlint.config.mjs .",
+    "format": "oxfmt -c oxfmt.config.mjs .",
+    "format:check": "oxfmt -c oxfmt.config.mjs --check ."
+  },
+  "dependencies": {
+    "@appium/base-plugin": "^4.0.0",
+    "@xmldom/xmldom": "0.9.12",
+    "css.escape": "1.5.1",
+    "xpath": "0.0.36"
+  },
+  "devDependencies": {
+    "@appium/oxc-config": "2.0.1",
+    "oxfmt": "0.74.0",
+    "oxlint": "1.89.0",
+    "oxlint-tsgolint": "7.0.2005",
+    "vitest": "5.1.0"
+  },
+  "peerDependencies": {
+    "appium": "^3.0.0 || ^4.0.0-beta.0"
+  },
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0",
+    "npm": ">=10"
+  },
+  "appium": {
+    "pluginName": "recorder",
+    "mainClass": "AppiumRecorderPlugin",
+    "schema": {
+      "$schema": "http://json-schema.org/draft-07/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "title": "Appium Recorder plugin options",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "off",
+            "on",
+            "all"
+          ],
+          "default": "on",
+          "description": "off: no recording; on: a session is recorded only after 'recorder: start', the recordings page or the appium:recorderAutoStart capability; all: every session is recorded from its start"
+        },
+        "dir": {
+          "type": "string",
+          "description": "Folder where finished recordings are saved (default: ~/appium-recordings)"
+        },
+        "suggest": {
+          "type": "boolean",
+          "default": true,
+          "description": "Replace weak locators with suggested unique ones (reads the page source once per element)"
+        },
+        "ui": {
+          "type": "boolean",
+          "default": false,
+          "description": "Serve the recordings page at /recorder (only to this machine, see remoteUi)"
+        },
+        "remoteUi": {
+          "type": "boolean",
+          "default": false,
+          "description": "Also serve the recordings page to other hosts. Anyone who can reach the server can then read, control and delete recordings"
+        }
+      }
+    }
+  }
+}

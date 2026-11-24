@@ -1,0 +1,8 @@
+appium-recorder-plugin
+Copyright Yuri Schwab
+
+This product includes software from the Appium Inspector
+(https://github.com/appium/appium-inspector), licensed under the Apache
+License, Version 2.0, copyright the Appium Inspector contributors. The
+included files are in lib/vendor/inspector; see lib/vendor/inspector/README.md
+for the changes made to them.
